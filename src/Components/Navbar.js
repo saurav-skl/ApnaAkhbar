@@ -7,8 +7,12 @@ import {
   Button,
   IconButton,
   Drawer,
+  ListItem,
+  List,
+  ButtonGroup,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import category_list from "./category";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Navbar() {
+const Navbar = ({ setCategory }) => {
   const classes = useStyles();
   const [state, setState] = useState({
     left: false,
@@ -44,6 +48,10 @@ function Navbar() {
     setState({ ...state, [anchor]: open });
   };
 
+  const handleCategory = (event) => {
+    setCategory(event);
+  };
+
   const list = (anchor) => (
     <div
       className={classes.list}
@@ -51,27 +59,24 @@ function Navbar() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
+      <ButtonGroup
+        orientation="vertical"
+        color="primary"
+        aria-label="vertical contained primary button group"
+        variant="text"
+      >
+        {category_list.map((item) => {
+          return (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => handleCategory(item)}
+            >
+              {item}
+            </Button>
+          );
+        })}
+      </ButtonGroup>
     </div>
   );
 
@@ -101,6 +106,6 @@ function Navbar() {
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 export default Navbar;

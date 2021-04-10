@@ -3,7 +3,7 @@ import "./App.css";
 import Navbar from "./Components/Navbar";
 import NewsContent from "./Components/NewsContent/NewsContent";
 import axios from "axios";
-import apikey from "./config"
+import apikey from "./config";
 
 const App = () => {
   const [category, setCategory] = useState("general");
@@ -26,11 +26,11 @@ const App = () => {
 
   useEffect(() => {
     newsApi();
-  }, [newsResult]);
+  }, [newsResult, category]);
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar setCategory={setCategory} />
       <NewsContent setnewsArray={setnewsArray} newsArray={newsArray} />
     </div>
   );

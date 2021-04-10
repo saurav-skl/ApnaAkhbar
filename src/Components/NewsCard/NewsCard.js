@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   news: {
     display: "flex",
     flexDirection: "row",
-    ["@media (max-width:780px)"]: {
+    ["@media (max-width:780px)"]: {    // eslint-disable-line no-useless-computed-key
       flexDirection: "column", // eslint-disable-line no-useless-computed-key
     },
   },
