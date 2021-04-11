@@ -18,7 +18,8 @@ const useStyles = makeStyles({
   news: {
     display: "flex",
     flexDirection: "row",
-    ["@media (max-width:780px)"]: {    // eslint-disable-line no-useless-computed-key
+    ["@media (max-width:780px)"]: {
+      // eslint-disable-line no-useless-computed-key
       flexDirection: "column", // eslint-disable-line no-useless-computed-key
     },
   },
@@ -26,26 +27,43 @@ const useStyles = makeStyles({
     height: 140,
     width: 400,
   },
+  details: {
+    display: "flex",
+    justifyContent: "space-between",
+    margin: "20px",
+  },
 });
 
-const NewsCard = ({ newsItem }) => {
+const NewsCard = ({ newsItem,idx }) => {
   const classes = useStyles();
   return (
     <div>
       {console.log("card=> ", newsItem)}
       <Card className={classes.root}>
-        <CardActionArea className={classes.news}>
+        <CardActionArea
+          href={newsItem.url}
+          target="_blank"
+          className={classes.news}
+        >
           <CardMedia
             className={classes.media}
             image={
               newsItem.urlToImage
                 ? newsItem.urlToImage
-                : "https://images.unsplash.com/photo-1603573355706-3f15d98cf100?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8bnVsbHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                : "https://i2.wp.com/www.indiafellow.org/blog/wp-content/uploads/2020/05/Marketplace-Lending-News.jpg?resize=750%2C410&ssl=1"
             }
-            title="Contemplative Reptile"
+            title={newsItem.title}
           />
+          <div className={classes.details}>
+            <Typography variant="body2" color="textSecondary" component="h2">
+              {new Date(newsItem.publishedAt).toDateString()}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="h2">
+              {newsItem.source.name}
+            </Typography>
+          </div>
           <CardContent>
-            <Typography gutterBottom variant="h6" component="h4">
+            <Typography gutterBottom variant="h5" component="h5">
               {newsItem.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -54,12 +72,12 @@ const NewsCard = ({ newsItem }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" href={newsItem.url}>
             Learn More
           </Button>
+          <Typography variant="h5" color="textSecondary" component="h2">
+            {idx + 1}
+          </Typography>
         </CardActions>
       </Card>
     </div>
