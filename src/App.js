@@ -4,6 +4,8 @@ import Navbar from "./Components/Navbar";
 import NewsContent from "./Components/NewsContent/NewsContent";
 import axios from "axios";
 import apikey from "./config";
+
+import wordsToNumbers from "words-to-numbers";
 import alanBtn from "@alan-ai/alan-sdk-web";
 
 const App = () => {
@@ -29,13 +31,28 @@ const App = () => {
     alanBtn({
       key:
         "dea939e17448a235251b5f4cba5344682e956eca572e1d8b807a3e2338fdd0dc/stage",
-      onCommand: ({ command, articles }) => {
+      onCommand: ({ command, articles, number }) => {
         if (command === "newHeadlines") {
           setnewsArray(articles);
         } else if (command === "instructions") {
           setIsOpen(true);
         } else if (command === "highlight") {
         } else if (command === "open") {
+          const parsenumber =
+            number.length > 2
+              ? wordsToNumbers(number, { fuzzy: true })
+              : number;
+
+          const article = articles[parsenumber - 1];
+
+          if (parsenumber > articles.length) {
+            alanBtn().playText("Please try that again...");
+          } else if (article) {
+            window.open(article.url, "_blank");
+            alanBtn().playText("Opening...");
+          } else {
+            alanBtn().playText("Please try that again...");
+          }
         }
       },
     });

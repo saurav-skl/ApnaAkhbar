@@ -14,6 +14,10 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 600,
     margin: 10,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    borderBottom: "10px solid white",
   },
   news: {
     display: "flex",
@@ -24,21 +28,24 @@ const useStyles = makeStyles({
     },
   },
   media: {
-    height: 140,
-    width: 400,
+    height: 250,
   },
   details: {
     display: "flex",
     justifyContent: "space-between",
     margin: "20px",
   },
+  cardActions: {
+    padding: "0 16px 8px 16px",
+    display: "flex",
+    justifyContent: "space-between",
+  },
 });
 
-const NewsCard = ({ newsItem,idx }) => {
+const NewsCard = ({ newsItem, idx }) => {
   const classes = useStyles();
   return (
     <div>
-      {console.log("card=> ", newsItem)}
       <Card className={classes.root}>
         <CardActionArea
           href={newsItem.url}
@@ -71,7 +78,7 @@ const NewsCard = ({ newsItem,idx }) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <CardActions className={classes.cardActions}>
           <Button size="small" color="primary" href={newsItem.url}>
             Learn More
           </Button>
