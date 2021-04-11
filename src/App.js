@@ -10,6 +10,7 @@ const App = () => {
   const [category, setCategory] = useState("general");
   const [newsArray, setnewsArray] = useState([]);
   const [newsResult, setnewsResult] = useState();
+  const [isOpen, setIsOpen] = useState(false);
   const key = "";
 
   // const newsApi = async () => {
@@ -24,17 +25,20 @@ const App = () => {
   //   }
   // };
 
-
-
   useEffect(() => {
     alanBtn({
       key:
         "dea939e17448a235251b5f4cba5344682e956eca572e1d8b807a3e2338fdd0dc/stage",
-        onCommand:({command,articles}) => {
-          if(command==='newHeadlines'){
-            setnewsArray(articles);
-          }
+      onCommand: ({ command, articles }) => {
+        if (command === "newHeadlines") {
+          // setnewsArray(articles);
+          alert("commands worked");
+        } else if (command === "instructions") {
+          setIsOpen(true);
+        } else if (command === "highlight") {
+        } else if (command === "open") {
         }
+      },
     });
   }, []);
 
