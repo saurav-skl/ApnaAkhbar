@@ -31,8 +31,7 @@ const App = () => {
         "dea939e17448a235251b5f4cba5344682e956eca572e1d8b807a3e2338fdd0dc/stage",
       onCommand: ({ command, articles }) => {
         if (command === "newHeadlines") {
-          // setnewsArray(articles);
-          alert("commands worked");
+          setnewsArray(articles);
         } else if (command === "instructions") {
           setIsOpen(true);
         } else if (command === "highlight") {
