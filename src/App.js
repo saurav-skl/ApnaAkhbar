@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     alanBtn({
       key:
-        "dea939e17448a235251b5f4cba5344682e956eca572e1d8b807a3e2338fdd0dc/stage",
+        "JGVX1_3HUNNqK1NUbxqcp0thpYm_CtJnUeqtsDTyYMUf7nah/stage",
       onCommand: ({ command, articles, number }) => {
         if (command === "newHeadlines") {
           setnewsArray(articles);
